@@ -1,73 +1,101 @@
 package hiber.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
 public class User {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-   @Column(name = "name")
-   private String firstName;
+    @Column(name = "name")
+    private String firstName;
 
-   @Column(name = "last_name")
-   private String lastName;
+    @Column(name = "last_name")
+    private String lastName;
 
-   @Column(name = "email")
-   private String email;
+    @Column(name = "email")
+    private String email;
 
-   @OneToOne
-   @JoinColumn(name = "car_id")
-   private Car carId;
+    @OneToOne
+    @JoinColumn(name = "car_id")
+    private Car carId;
 
-   public User() {}
-   
-   public User(String firstName, String lastName, String email) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.email = email;
-   }
+    public User() {
+    }
 
-   public Long getId() {
-      return id;
-   }
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
-   public void setId(Long id) {
-      this.id = id;
-   }
+    public Long getId() {
+        return id;
+    }
 
-   public String getFirstName() {
-      return firstName;
-   }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
+    public String getFirstName() {
+        return firstName;
+    }
 
-   public String getLastName() {
-      return lastName;
-   }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
+    public String getLastName() {
+        return lastName;
+    }
 
-   public String getEmail() {
-      return email;
-   }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-   public void setEmail(String email) {
-      this.email = email;
-   }
+    public String getEmail() {
+        return email;
+    }
 
-   public Car getCarId() {
-      return carId;
-   }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-   public void setCarId(Car carId) {
-      this.carId = carId;
-   }
+    public Car getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Car carId) {
+        this.carId = carId;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", carId=" + carId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(carId, user.carId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, carId);
+    }
+
+
 }
