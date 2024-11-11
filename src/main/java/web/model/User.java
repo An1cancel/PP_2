@@ -1,8 +1,8 @@
 package web.model;
-
 import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -16,13 +16,18 @@ public class User {
     private int id;
 
     @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Name should contain only letters")
     @Column(name = "name")
     private String name;
 
     @NotEmpty(message = "Surname should not be empty")
+    @Size(min = 2, max = 50, message = "Surname should be between 2 and 50 characters")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Surname should contain only letters")
     @Column(name = "surname")
     private String surname;
 
+    @Min(value = 1, message = "Age should be greater than 0")
     @Column(name = "age")
     private int age;
 
